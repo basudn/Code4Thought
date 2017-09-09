@@ -10,31 +10,34 @@ public class six {
 	}
 
 	private static void sortList(Node head) {
-		Node cursor = head;
-		while(cursor.next != null) {
-			Node pivot = cursor, innerCursor = cursor, prevNode = cursor;
-			while(innerCursor.next != null) {
-				System.out.println(pivot.data+"+"+innerCursor.next.data);
-				if(pivot.data >= innerCursor.next.data) {
-					pivot = innerCursor.next;
-					prevNode = innerCursor;
+		Node cursor = null, pivot = null, prevNode = null, prevCursor = null, newHead = null;
+		while(head.next != null) {
+			cursor = head;
+			pivot = head;
+			prevCursor = null;
+			while(cursor.next != null) {
+				if(cursor.next.data <= pivot.data) {
+					pivot = cursor.next;
+					prevCursor = cursor;
 				}
-				innerCursor = innerCursor.next;
+				cursor = cursor.next;
 			}
-			if(prevNode != cursor) {
-				System.out.println("in");
-				Node temp = prevNode.next;
-				prevNode.next = prevNode.next.next;
-				if(head.data == cursor.data) {
-					temp.next = head;
-					head = temp;
-				} else {
-					temp.next = cursor;
-					cursor = temp;
+			if(pivot != head) {
+				if(prevCursor.next != null) {
+					prevCursor.next = prevCursor.next.next;
 				}
+				if(prevNode != null) {
+					prevNode.next = pivot;
+				}
+				pivot.next = head;
+				head = pivot;
 			}
-			cursor = cursor.next;
+			if(newHead == null) {
+				newHead = head;
+			}
+			prevNode = head;
+			head = head.next;			
 		}
-		head.printElements();
+		newHead.printElements();
 	}
 }
