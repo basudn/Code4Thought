@@ -13,8 +13,8 @@ public class two {
 		if(input.length > 1) {
 			for(int i=0; i<(input.length-1)/2; i++) {
 				char temp = input[i];
-				input[i] = input[input.length-2-i];
-				input[input.length-2-i] = temp;
+				input[i] = input[input.length-1-i];
+				input[input.length-1-i] = temp;
 			}
 		}
 		return new String(input);
